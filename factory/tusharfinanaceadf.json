@@ -1,0 +1,16 @@
+{
+	"name": "tusharfinanaceadf",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true,
+			"isExplicitlySet": false
+		}
+	},
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "fc17e25f-a466-42ec-a116-6fab04738f26",
+		"tenantId": "e4a6c183-14ba-41a5-9257-6c6860e3cf54"
+	}
+}
