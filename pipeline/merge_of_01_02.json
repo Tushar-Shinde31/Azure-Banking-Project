@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "azuresql_to_adls",
+				"name": "azuresql_to_adls_01",
 				"type": "ExecutePipeline",
 				"dependsOn": [],
 				"policy": {
@@ -11,19 +11,15 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"pipeline": {
-						"referenceName": "finance_azuresql_to_adls_01",
-						"type": "PipelineReference"
-					},
 					"waitOnCompletion": true
 				}
 			},
 			{
-				"name": "adls_to_adb_nb",
+				"name": "adls_to_azureadb_02",
 				"type": "ExecutePipeline",
 				"dependsOn": [
 					{
-						"activity": "azuresql_to_adls",
+						"activity": "azuresql_to_adls_01",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -34,10 +30,6 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"pipeline": {
-						"referenceName": "finanace_adls_to_adb_nb_02",
-						"type": "PipelineReference"
-					},
 					"waitOnCompletion": true
 				}
 			}
