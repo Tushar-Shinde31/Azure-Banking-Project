@@ -64,11 +64,11 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"notebookPath": "/Users/atulkala96@gmail.com/load_bronze",
+					"notebookPath": "/Users/atulkala96@gmail.com/Banking_Project/load_bronze",
 					"baseParameters": {
-						"batch_id": "20ad0b18-8d8b-4041-aec5-9aa1d4e1ad62",
+						"batch_id": "c2943acc-d5ce-4190-ae40-00c85da46689",
 						"batch_info": {
-							"value": "@string(activity('GetBatchDetails').output.value)",
+							"value": "@activity('azuresql_to_adls_011').output.pipelineReturnValue",
 							"type": "Expression"
 						},
 						"container": {
