@@ -216,15 +216,24 @@
 								"storedProcedureName": "[control_schema].[record_extract_failure]",
 								"storedProcedureParameters": {
 									"batch_id": {
-										"value": "@pipeline().RunId",
+										"value": {
+											"value": "@pipeline().RunId",
+											"type": "Expression"
+										},
 										"type": "String"
 									},
 									"copied_rows": {
-										"value": "@activity('CopySource').output.rowsCopied",
+										"value": {
+											"value": "@activity('CopySource').output.rowsCopied",
+											"type": "Expression"
+										},
 										"type": "Int64"
 									},
 									"error_message": {
-										"value": "@activity('CopySource').error.message",
+										"value": {
+											"value": "@activity('CopySource').error.message",
+											"type": "Expression"
+										},
 										"type": "String"
 									},
 									"failed_activity": {
@@ -235,11 +244,17 @@
 										"type": "String"
 									},
 									"read_rows": {
-										"value": "@activity('CopySource').output.rowsRead",
+										"value": {
+											"value": "@activity('CopySource').output.rowsRead",
+											"type": "Expression"
+										},
 										"type": "Int64"
 									},
 									"table_name": {
-										"value": "@item().table_name",
+										"value": {
+											"value": "@item().table_name",
+											"type": "Expression"
+										},
 										"type": "String"
 									}
 								}
@@ -355,10 +370,18 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"notebookPath": "/Users/atulkala96@gmail.com/load_bronze"
+					"notebookPath": "/Users/atulkala96@gmail.com/load_bronze",
+					"baseParameters": {
+						"batch_id": "20ad0b18-8d8b-4041-aec5-9aa1d4e1ad62",
+						"batch_info": "@string(activity('GetBatchDetails').output.value)",
+						"container": {
+							"value": "landing",
+							"type": "Expression"
+						}
+					}
 				},
 				"linkedServiceName": {
-					"referenceName": "AzureDatabricks1",
+					"referenceName": "ls_azureadb",
 					"type": "LinkedServiceReference"
 				}
 			}
