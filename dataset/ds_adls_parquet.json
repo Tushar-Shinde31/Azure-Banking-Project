@@ -19,7 +19,7 @@
 					"value": "@dataset().folder_path",
 					"type": "Expression"
 				},
-				"fileSystem": "landing11"
+				"fileSystem": "landing"
 			},
 			"compressionCodec": "snappy"
 		},
