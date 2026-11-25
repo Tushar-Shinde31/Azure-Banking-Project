@@ -1,0 +1,89 @@
+{
+	"name": "finanace_adls_to_adb_nb_02",
+	"properties": {
+		"activities": [
+			{
+				"name": "CommitBatch",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "LoadBronze",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[control_schema].[commit_batch]",
+					"storedProcedureParameters": {
+						"batch_id": {
+							"value": {
+								"value": "@pipeline().RunId",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"high_watermark": {
+							"value": {
+								"value": "@activity('GetWindow').output.firstRow.high_watermark",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"expected_tables": {
+							"value": {
+								"value": "@length(activity('GetTables').output.value)",
+								"type": "Expression"
+							},
+							"type": "Int"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_hc_sql",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "LoadBronze",
+				"type": "DatabricksNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/atulkala96@gmail.com/load_bronze",
+					"baseParameters": {
+						"batch_id": "20ad0b18-8d8b-4041-aec5-9aa1d4e1ad62",
+						"batch_info": {
+							"value": "@string(activity('GetBatchDetails').output.value)",
+							"type": "Expression"
+						},
+						"container": {
+							"value": "landing",
+							"type": "Expression"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_azureadb",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"concurrency": 1,
+		"annotations": []
+	}
+}
